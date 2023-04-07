@@ -22,10 +22,11 @@ jobs:
       uses: tecolicom/actions-install-node-modules@v1.2
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish julyoc.github.io.csproj -c Release -o release --nologo
-    - name: Github Pages Deploy Action
-      uses: DenverCoder1/doxygen-github-pages-action@v1.2.0
+      run: dotnet publish julyoc.github.io.csproj -p GHPages=true -o public -c Release
+    # Deploy the site
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.DEPLOY_TOKEN }}
-        branch: gh-pages
-        folder: release/wwwroot
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: public/wwwroot
+        force_orphan: true
