@@ -16,12 +16,6 @@
 	<Target Name="BuildCssRel" Condition="'$(Configuration)' == 'Release'" AfterTargets="Build">
 		<Exec Command="npm run buildcss" />
 	</Target>
-	<ItemGroup>
-	  <None Remove="Shared\IndexComponents\AboutMeComponent.razor.css" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Content Include="Shared\IndexComponents\AboutMeComponent.razor.css" />
-	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Majorsoft.Blazor.Components.Common.JsInterop" Version="1.5.0" />
