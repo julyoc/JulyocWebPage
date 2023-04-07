@@ -1,4 +1,6 @@
 name: Deploy to GitHub Pages
+env:
+  PUBLISH_DIR: bin/Release/netstandard2.1/publish/wwwroot
 
 # Run workflow on every push to the master branch
 on:
@@ -11,22 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     # uses GitHub's checkout action to checkout code form the master branch
-    - uses: actions/checkout@v2.7.0
-    # sets up .NET Core SDK 3.1
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v3.0.3
-      with:
-        dotnet-version: 7.0
+    - uses: actions/checkout@v2
     # install node_modules
     - name: install node modules
       uses: tecolicom/actions-install-node-modules@v1.2
     # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish julyoc.github.io.csproj -p GHPages=true -o public -c Release
-    # Deploy the site
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+      run: dotnet publish -c Release
+    - name: Rewrite base href
+      uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: public/wwwroot
-        force_orphan: true
+        html_path: ${{ env.PUBLISH_DIR }}/index.html
+        base_href: /BlazorOnGitHubPages/
+
+    - name: GitHub Pages
+      if: success()
+      uses: crazy-max/ghaction-github-pages@v1.5.1
+      with:
+        target_branch: gh-pages
+        build_dir: ${{ env.PUBLISH_DIR }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
