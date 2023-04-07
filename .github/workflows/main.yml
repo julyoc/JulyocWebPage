@@ -25,7 +25,11 @@ jobs:
       with:
         html_path: ${{ env.PUBLISH_DIR }}/index.html
         base_href: /JulyocWebPage/
-
+    - name: Create file 
+      uses: "finnp/create-file-action@master"
+      env:
+        FILE_NAME: "bin/Release/net7.0/publish/wwwroot/.nojekyll"
+        FILE_DATA: ""
     - name: GitHub Pages
       if: success()
       uses: crazy-max/ghaction-github-pages@v1.5.1
