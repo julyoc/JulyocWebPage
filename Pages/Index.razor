@@ -24,7 +24,7 @@
 
 @code {
 
-    private string _scrollEventId = null;
+    private string? _scrollEventId = null;
 
     public string BtnClass = "hidden";
 
@@ -43,17 +43,20 @@
 
     private async Task PageScrolled(ScrollEventArgs args)
     {
-        logger.LogInformation("x: {x}, y: {y}", args.X, args.Y);
-
-        if (args.Y >= 100)
+        await Task.Run(() =>
         {
-            BtnClass = "block";
-        } else
-        {
-            BtnClass = "hidden";
-        }
+            logger.LogInformation("x: {x}, y: {y}", args.X, args.Y);
 
-        StateHasChanged();
+            if (args.Y >= 100)
+            {
+                BtnClass = "block";
+            } else
+            {
+                BtnClass = "hidden";
+            }
+
+            StateHasChanged();
+        });
     }
 
     private bool _scrollSubscribed = false;
@@ -61,7 +64,7 @@
     {
         if (_scrollSubscribed)
         {
-            await _scrollHandler.RemovePageScrollAsync(_scrollEventId);
+            await _scrollHandler.RemovePageScrollAsync(_scrollEventId!);
         }
         else
         {

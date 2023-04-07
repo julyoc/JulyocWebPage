@@ -47,7 +47,7 @@
 
 @code {
 
-    private string _scrollEventId = null;
+    private string? _scrollEventId = null;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -59,7 +59,10 @@
 
     private async Task PageScrolled(ScrollEventArgs args)
     {
-        StateHasChanged();
+        await Task.Run(() =>
+        {
+            StateHasChanged();
+        });
     }
 
     public async ValueTask DisposeAsync()
@@ -75,7 +78,7 @@
     {
         if (_scrollSubscribed)
         {
-            await _scrollHandler.RemovePageScrollAsync(_scrollEventId);
+            await _scrollHandler.RemovePageScrollAsync(_scrollEventId!);
         }
         else
         {
