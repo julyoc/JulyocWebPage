@@ -24,7 +24,7 @@ jobs:
       uses: SteveSandersonMS/ghaction-rewrite-base-href@v1
       with:
         html_path: ${{ env.PUBLISH_DIR }}/index.html
-        base_href: /JulyocWebPage/
+        base_href: /
     - name: Create file 
       uses: "finnp/create-file-action@master"
       env:
