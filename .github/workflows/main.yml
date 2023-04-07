@@ -24,9 +24,8 @@ jobs:
     - name: Publish .NET Core Project
       run: dotnet publish julyoc.github.io.csproj -c Release -o release --nologo
     - name: Github Pages Deploy Action
-      uses: ptienchuan/deploy-github-pages-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+      uses: DenverCoder1/doxygen-github-pages-action@v1.2.0
       with:
-        target-branch: "gh-pages"
-        source-directory: "release/wwwroot"
+        github_token: ${{ secrets.DEPLOY_TOKEN }}
+        branch: gh-pages
+        folder: release/wwwroot
