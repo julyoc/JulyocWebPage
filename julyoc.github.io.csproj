@@ -4,10 +4,10 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-	<PublishTrimmed>false</PublishTrimmed>
   </PropertyGroup>
 
 	<PropertyGroup>
+		<TrimMode>partial</TrimMode>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
