@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+	<PropertyGroup>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	</PropertyGroup>
+
+	<Target Name="BuildCssDev" Condition="'$(Configuration)' == 'Debug'" AfterTargets="Build">
+		<Exec Command="npm run buildcss" />
+	</Target>
+	<Target Name="BuildCssRel" Condition="'$(Configuration)' == 'Release'" AfterTargets="Build">
+		<Exec Command="npm run buildcss" />
+	</Target>
+	<ItemGroup>
+	  <None Remove="Shared\IndexComponents\AboutMeComponent.razor.css" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="Shared\IndexComponents\AboutMeComponent.razor.css" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Majorsoft.Blazor.Components.Common.JsInterop" Version="1.5.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.3" PrivateAssets="all" />
+  </ItemGroup>
+
+</Project>

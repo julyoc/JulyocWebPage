@@ -1,0 +1,20 @@
+﻿@inject NavState navState
+
+<article id="Contact" class="flex flex-row justify-center mb-20" @ref=ContactRef>
+    <section class="basis-full">
+        <div class="flex flex-row">
+            <div class="basis-full md:basis-11/12">
+                <h2 class="mr-6 text-end text-5xl md:text-7xl leading-tight font-bold font-mono text-secondary2">Contact</h2>
+            </div>
+        </div>
+        <div class="w-full min-h-[325px] bg-secondary2"></div>
+    </section>
+</article>
+
+@code {
+    ElementReference ContactRef { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender) navState.addElemRef(ContactRef);
+    }
+}

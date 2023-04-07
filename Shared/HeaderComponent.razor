@@ -1,0 +1,100 @@
+﻿@using System.Runtime.InteropServices.JavaScript
+@inject NavState navState
+@inject IScrollHandler _scrollHandler
+@inject ILogger<HeaderComponent> logger
+@implements IDisposable
+@implements IAsyncDisposable
+
+<header>
+    <nav class="relative flex w-full items-center justify-between bg-white py-2 text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 md:flex-wrap md:justify-start" data-te-navbar-ref>
+        <div class="flex w-full flex-wrap items-center justify-between px-6">
+            <div class="flex items-center">
+                <button class="mr-2 border-0 bg-transparent py-2 text-xl leading-none transition-shadow duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 md:hidden" type="button" data-te-collapse-init data-te-target="#navbarSupportedContentY" aria-controls="navbarSupportedContentY" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="[&>svg]:w-5">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="h-6 w-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                        </svg>
+                    </span>
+                </button>
+                <JulyocLogo Class="w-32 sm:w-40 h-auto pr-0 sm:pr-8 hidden"></JulyocLogo>
+            </div>
+            <div class="flex flex-row items-center">
+                <div class="basis-1/4">
+                    <JulyocLogo Class="w-32 sm:w-40 h-auto pr-0 sm:pr-8"></JulyocLogo>
+                </div>
+                <div class="basis-3/4">
+                    <div class="!visible hidden grow basis-[100%] items-center md:!flex md:basis-auto" id="navbarSupportedContentY" data-te-collapse-item>
+                        <ul class="mr-auto flex flex-col md:flex-row" data-te-navbar-nav-ref>
+                            <li data-te-nav-item-ref class="px-0 sm:px-4">
+                                <NavLink class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 lg:p-2 [&.active]:text-black/90" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light" href="#Home" @onclick='() => OnClick("2")'>Home</NavLink>
+                            </li>
+                            <li data-te-nav-item-ref class="px-0 sm:px-4">
+                                <NavLink class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 lg:p-2 [&.active]:text-black/90" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light" href="#AboutMe" @onclick='() => OnClick("3")'>About Me</NavLink>
+                            </li>
+                            <li data-te-nav-item-ref class="px-0 sm:px-4">
+                                <NavLink class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 lg:p-2 [&.active]:text-black/90" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light" href="#Skills" @onclick='() => OnClick("4")'>Skills</NavLink>
+                            </li>
+                            <li data-te-nav-item-ref class="px-0 sm:px-4">
+                                <NavLink class="block transition duration-150 ease-in-out hover:text-neutral-700 focus:text-neutral-700 disabled:text-black/30 lg:p-2 [&.active]:text-black/90" data-te-nav-link-ref data-te-ripple-init data-te-ripple-color="light" href="#Contact" @onclick='() => OnClick("5")'>Contact</NavLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+@code {
+
+    private string _scrollEventId = null;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!firstRender)
+            return;
+
+        await ScrollEventHandler();
+    }
+
+    private async Task PageScrolled(ScrollEventArgs args)
+    {
+        StateHasChanged();
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_scrollHandler is not null)
+        {
+            await _scrollHandler.DisposeAsync();
+        }
+    }
+
+    private bool _scrollSubscribed = false;
+    private async Task ScrollEventHandler()
+    {
+        if (_scrollSubscribed)
+        {
+            await _scrollHandler.RemovePageScrollAsync(_scrollEventId);
+        }
+        else
+        {
+            _scrollEventId = await _scrollHandler.RegisterPageScrollAsync(PageScrolled);
+        }
+
+        _scrollSubscribed = !_scrollSubscribed;
+    }
+
+    public async Task OnClick (string elemId)
+    {
+        logger.LogInformation("{}", navState.ElementReference.Select(elem => elem.Id));
+        ElementReference e = navState.ElementReference.Where(elem => elem.Id == elemId).FirstOrDefault();
+        await e.ScrollToElementAsync();
+        navState.LoadElems += StateHasChanged;
+    }
+
+    public void Dispose()
+    {
+        navState.LoadElems -= StateHasChanged;
+    }
+}

@@ -1,0 +1,20 @@
+﻿.cls-1 {
+    font-size: 100px;
+    stroke: #000;
+    stroke-width: 2px;
+    font-family: LaBelleAurore, La Belle Aurore;
+}
+
+.cls-1, .cls-2 {
+    stroke-miterlimit: 10;
+}
+
+.cls-2 {
+    fill: none;
+    stroke: #034040;
+    stroke-width: 4.5px;
+}
+
+.cls-3 {
+    fill: #6a4805;
+}

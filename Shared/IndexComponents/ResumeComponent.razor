@@ -1,0 +1,89 @@
+﻿@inject NavState navState
+
+<article class="flex justify-center mb-24 mt-32" id="Home" @ref=ContactRef>
+    <section class="flex flex-col rounded-lg bg-white shadow-lg md:max-w-2xl lg:max-w-4xl md:flex-row">
+        <div class="h-auto w-full rounded-t-lg object-cover md:h-auto md:w-full md:rounded-none md:rounded-l-lg">
+            <div id="carouselExampleControls"
+             class="relative"
+             data-te-carousel-init
+             data-te-carousel-slide>
+            <div class="relative w-full overflow-hidden after:clear-both after:block after:content-['']">
+                <div class="relative float-left -mr-[100%] w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                     data-te-carousel-item
+                     data-te-carousel-active>
+                    <img src="img/1678665712580.jpg" class="block w-full md:rounded-none md:rounded-l-lg" alt="Wild Landscape" />
+                </div>
+                <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                     data-te-carousel-item>
+                    <img src="img/1678665712522.jpg" class="block w-full md:rounded-none md:rounded-l-lg" alt="Camera" />
+                </div>
+                <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                     data-te-carousel-item>
+                    <img src="img/1678665712564.jpg" class="block w-full md:rounded-none md:rounded-l-lg" alt="Exotic Fruits" />
+                </div>
+                <div class="relative float-left -mr-[100%] hidden w-full transition-transform duration-[600ms] ease-in-out motion-reduce:transition-none"
+                     data-te-carousel-item>
+                    <img src="img/1678665712506.jpg" class="block w-full md:rounded-none md:rounded-l-lg" alt="Exotic Fruits" />
+                </div>
+            </div>
+            <button class="absolute top-0 bottom-0 left-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+                    type="button"
+                    data-te-target="#carouselExampleControls"
+                    data-te-slide="prev">
+                <span class="inline-block h-8 w-8">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="1.5"
+                         stroke="currentColor"
+                         class="h-6 w-6">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </span>
+                <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Previous</span>
+            </button>
+            <button class="absolute top-0 bottom-0 right-0 z-[1] flex w-[15%] items-center justify-center border-0 bg-none p-0 text-center text-white opacity-50 transition-opacity duration-150 ease-[cubic-bezier(0.25,0.1,0.25,1.0)] hover:text-white hover:no-underline hover:opacity-90 hover:outline-none focus:text-white focus:no-underline focus:opacity-90 focus:outline-none motion-reduce:transition-none"
+                    type="button"
+                    data-te-target="#carouselExampleControls"
+                    data-te-slide="next">
+                <span class="inline-block h-8 w-8">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke-width="1.5"
+                         stroke="currentColor"
+                         class="h-6 w-6">
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </span>
+                <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">Next</span>
+            </button>
+        </div>
+        </div>
+        <div class="flex flex-row justify-start p-6 items-center">
+            <div>
+                <h5 class="mb-2 text-3xl font-bold font-mono text-neutral-800">
+                    Julyoc <small class="text-md">(Julio Castro).</small>
+                </h5>
+                <p class="mb-4 text-base text-neutral-600 font-mono">
+                    Science, mountaineering, cooking and software development.
+                </p>
+                <p class="text-xs text-neutral-500">
+                    <small>Software Enginner</small>
+                </p>
+            </div>
+        </div>
+    </section>
+</article>
+
+@code {
+    ElementReference ContactRef { get; set; }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender) navState.addElemRef(ContactRef);
+    }
+}
