@@ -7,7 +7,6 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<BuiltInComInteropSupport></BuiltInComInteropSupport>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
@@ -16,6 +15,12 @@
 	</Target>
 	<Target Name="BuildCssRel" Condition="'$(Configuration)' == 'Release'" AfterTargets="Build">
 		<Exec Command="npm run buildcss" />
+	</Target>
+	<Target Name="TrimmingDisabledWarning" Condition="'$(PublishTrimmed)' != 'true'" AfterTargets="Publish">
+		<Warning Text="****************************************************************************
+PublishTrimmed is disabled due to https://github.com/mono/linker/issues/1586
+Make sure to re-enable it once the issue is resolved.
+****************************************************************************" />
 	</Target>
 
   <ItemGroup>
