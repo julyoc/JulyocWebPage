@@ -7,7 +7,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<TrimMode>partial</TrimMode>
+		<BuiltInComInteropSupport></BuiltInComInteropSupport>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 	</PropertyGroup>
 
