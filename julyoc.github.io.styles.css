@@ -1,0 +1,41 @@
+@import '_content/Majorsoft.Blazor.Components.Common.JsInterop/Majorsoft.Blazor.Components.Common.JsInterop.bundle.scp.css';
+
+/* /Shared/FooterComponent.razor.rz.scp.css */
+footer > div > strong.text-lg[b-ya23bbaimk] {
+    text-transform: uppercase;
+}
+
+
+footer[b-ya23bbaimk] {
+    background-color: rgba(3, 64, 64, 0.1);
+}
+
+footer > div[b-ya23bbaimk] {
+    opacity: 1;
+}
+/* /Shared/IndexComponents/AboutMeComponent.razor.rz.scp.css */
+article#AboutMe > section[b-ztlfjizasb] {
+    background-color: rgba(45, 161, 161, 0.1);
+}
+/* /Shared/JulyocLogo.razor.rz.scp.css */
+.cls-1[b-7ea10i608j] {
+    font-size: 100px;
+    stroke: #000;
+    stroke-width: 2px;
+    font-family: LaBelleAurore, La Belle Aurore;
+}
+
+.cls-1[b-7ea10i608j], .cls-2[b-7ea10i608j] {
+    stroke-miterlimit: 10;
+}
+
+.cls-2[b-7ea10i608j] {
+    fill: none;
+    stroke: #034040;
+    stroke-width: 4.5px;
+}
+
+.cls-3[b-7ea10i608j] {
+    fill: #6a4805;
+}
+/* /Shared/MainLayout.razor.rz.scp.css */

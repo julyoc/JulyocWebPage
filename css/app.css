@@ -1,0 +1,23 @@
+@font-face {
+    font-family: LaBelleAurore;
+    src: url(./fonts/LaBelleAurore-Regular.otf) format("opentype"), 
+        url(./fonts/LaBelleAurore-Regular.ttf) format("truetype"), 
+        url(./fonts/LaBelleAurore-Regular.woff) format("woff"), 
+        url(./fonts/LaBelleAurore-Regular.woff2) format("woff2");
+}
+
+@font-face {
+    font-family: EastSeaDokdo;
+    src: url(./fonts/EastSeaDokdo-Regular.otf) format("opentype"), 
+        url(./fonts/EastSeaDokdo-Regular.ttf) format("truetype"), 
+        url(./fonts/EastSeaDokdo-Regular.woff) format("woff"), 
+        url(./fonts/EastSeaDokdo-Regular.woff2) format("woff2");
+}
+
+#app, body {
+    scroll-behavior: smooth !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
