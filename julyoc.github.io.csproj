@@ -17,10 +17,7 @@
 		<Exec Command="npm run buildcss" />
 	</Target>
 	<Target Name="TrimmingDisabledWarning" Condition="'$(PublishTrimmed)' != 'true'" AfterTargets="Publish">
-		<Warning Text="****************************************************************************
-PublishTrimmed is disabled due to https://github.com/mono/linker/issues/1586
-Make sure to re-enable it once the issue is resolved.
-****************************************************************************" />
+		<Warning Text="****************************************************************************&#xD;&#xA;PublishTrimmed is disabled due to https://github.com/mono/linker/issues/1586&#xD;&#xA;Make sure to re-enable it once the issue is resolved.&#xD;&#xA;****************************************************************************" />
 	</Target>
 
   <ItemGroup>

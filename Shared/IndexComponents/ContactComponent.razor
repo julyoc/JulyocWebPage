@@ -1,4 +1,7 @@
-﻿@inject NavState navState
+﻿@using System.ComponentModel.DataAnnotations;
+@using System.Net;
+@using System.Net.Mail;
+@inject NavState navState
 
 <article id="Contact" class="flex flex-row justify-center mb-20" @ref=ContactRef>
     <section class="basis-full">
@@ -7,14 +10,70 @@
                 <h2 class="mr-6 text-end text-5xl md:text-7xl leading-tight font-bold font-mono text-secondary2">Contact</h2>
             </div>
         </div>
-        <div class="w-full min-h-[325px] bg-secondary2"></div>
+        <div class="w-full min-h-[325px] bg-secondary2 flex flex-row">
+            <div class="basis-full hidden md:block md:basis-1/2">
+            
+            </div>
+            <div class="basis-full md:basis-1/2 m-8 text-white text-right">
+                <EditForm Model="@mailModel" OnValidSubmit="@HandleSubmit">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="relative mb-3 xl:w-96" data-te-input-wrapper-init>
+                        <InputText @bind-Value="mailModel.From" class="peer block min-h-[auto] w-full rounded border-solid border-2 border-white bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-white data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="from" DisplayName="From Email"></InputText>
+                        <label for="from" class="bg-secondary2 pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate mt-[0.37rem] px-1 leading-[1.6] text-white transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-white peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">From Email</label>
+                    </div>
+                    <div class="relative mb-3" data-te-input-wrapper-init>
+                        <InputText @bind-Value="mailModel.Names" class="peer block min-h-[auto] w-full rounded border-solid border-2 border-white bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-white data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="names" DisplayName="Full Name"></InputText>
+                        <label for="names" class="bg-secondary2 pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate mt-[0.37rem] px-1 leading-[1.6] text-white transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-white peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">Full Name</label>
+                    </div>
+                    <div class="relative mb-3" data-te-input-wrapper-init>
+                        <InputText @bind-Value="mailModel.Subject" class="peer block min-h-[auto] w-full rounded border-solid border-2 border-white bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-white data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="subject" DisplayName="Subject"></InputText>
+                        <label for="subject" class="bg-secondary2 pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate mt-[0.37rem] px-1 leading-[1.6] text-white transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-white peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">Subject</label>
+                    </div>
+                    <div class="relative mb-3" data-te-input-wrapper-init>
+                        <InputTextArea @bind-Value="mailModel.Body" class="peer block min-h-[auto] w-full rounded border-solid border-2 border-white bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-white data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0" id="body" DisplayName="Email content"></InputTextArea>
+                        <label for="body" class="bg-secondary2 pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] origin-[0_0] truncate mt-[0.37rem] px-1 leading-[1.6] text-white transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-white peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none">Email content</label>
+                    </div>
+                    <button type="submit" class="inline-block rounded bg-white w-32 px-6 pb-2 pt-2.5 text-xs font-medium font-bold uppercase leading-normal text-black shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)]">Send</button>
+                </EditForm>
+            </div>
+        </div>
     </section>
 </article>
 
 @code {
     ElementReference ContactRef { get; set; }
+    MailModel mailModel = new();
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender) navState.addElemRef(ContactRef);
+    }
+    private void HandleSubmit()
+    {
+        const string To = "julito.1998@hotmail.es";
+        const string Password = "Julio@0998857876";
+        MailMessage mailMessage = new();
+        mailMessage.To.Add(To);
+        mailMessage.From = new MailAddress(mailModel.From);
+        mailMessage.Subject = mailModel.Names + " " + mailModel.Subject;
+        mailMessage.Body = mailModel.Body;
+        using (SmtpClient smtp = new())
+        {
+            smtp.Host = "Gmail.com";
+            smtp.Credentials = new NetworkCredential("1j1u1l1i1o@gmail.com", Password);
+            smtp.Send(mailMessage);
+        }
+    }
+
+    private class MailModel
+    {
+        [Required, EmailAddress]
+        public string From { get; set; }
+        [Required]
+        public string Subject { get; set; }
+        [Required]
+        public string Body { get; set; }
+        [Required]
+        public string Names { get; set; }
     }
 }
